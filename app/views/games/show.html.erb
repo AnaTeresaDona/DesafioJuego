@@ -1,9 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+ 
+ <h1> <%=@game.title %> </h1>
+
+ <br>
+ <%= image_tag @game.cover.variant(resize: "300x300") %>
+
+ <hr>
+
+
 <p>
   <strong>Rules:</strong>
   <%= @game.rules %>
 </p>
+
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

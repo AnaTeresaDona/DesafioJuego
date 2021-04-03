@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
       <th>Cover File</th>
-      <th>Rules</th>
-      <th>Rule PDF File</th>      
+      <th>Rules</th>   
       <th>Pieces</th>
       <th colspan="3"></th>
     </tr>
@@ -16,13 +16,20 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= image_tag game.cover %></td>
-        <td><%= game.rules %></td>
-        <td><%= image_tag game.rules %></td>
         <td>
-          <% game.pieces.each do |piece| %>
-            <%= image_tag piece.variant(resize: "100x100", type: :grayscale %>
-          <%end%>
+          <ul><%= game.title %></ul>
+        </td>
+        <td>
+          <ul><%= image_tag game.cover.variant(resize: "100x100") %></ul>
+          <ul><%= link_to "Bajar imagen de portada", rails_blob_path(game.cover, disposition: "attachment") %></ul>
+        </td>
+        <td>
+          <ul><%= truncate game.rules, length:  300 %> <br> <%= link_to 'Leer más', game %> </ul>       
+          <ul><%= link_to "Bajar Instrucciones PDF", rails_blob_path(game.rule, disposition: "attachment") %></ul>
+        </td>
+        <td>
+            <ul><%= image_tag game.pieces.last.variant(resize: "100x100", type: :grayscale) %></ul>
+            <ul><%= link_to "Bajar foto", rails_blob_path(game.pieces.last, disposition: "attachment") %></ul>
         </td>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>
